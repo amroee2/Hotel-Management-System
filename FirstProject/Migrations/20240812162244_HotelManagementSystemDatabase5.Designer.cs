@@ -4,6 +4,7 @@ using FirstProject.DsConn;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstProject.Migrations
 {
     [DbContext(typeof(FirstContext))]
-    partial class FirstContextModelSnapshot : ModelSnapshot
+    [Migration("20240812162244_HotelManagementSystemDatabase5")]
+    partial class HotelManagementSystemDatabase5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,13 +110,16 @@ namespace FirstProject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("HotelRef")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("HotelDetailID");
 
-                    b.HasIndex("HotelID");
+                    b.HasIndex("HotelRef");
 
                     b.ToTable("HotelDetail", "HotelManagementSystem");
                 });
@@ -133,10 +139,16 @@ namespace FirstProject.Migrations
                     b.Property<int>("GuestID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("GuestRef")
+                        .HasColumnType("int");
+
                     b.Property<bool>("ReservationStatus")
                         .HasColumnType("bit");
 
                     b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomRef")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset?>("StartDate")
@@ -149,9 +161,9 @@ namespace FirstProject.Migrations
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("GuestID");
+                    b.HasIndex("GuestRef");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomRef");
 
                     b.ToTable("Reservation", "HotelManagementSystem");
                 });
@@ -165,6 +177,9 @@ namespace FirstProject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
                     b.Property<int>("HotelID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HotelRef")
                         .HasColumnType("int");
 
                     b.Property<int?>("Price")
@@ -193,7 +208,7 @@ namespace FirstProject.Migrations
 
                     b.HasKey("RoomId");
 
-                    b.HasIndex("HotelID");
+                    b.HasIndex("HotelRef");
 
                     b.ToTable("Room", "HotelManagementSystem");
                 });
@@ -216,9 +231,12 @@ namespace FirstProject.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoomRef")
+                        .HasColumnType("int");
+
                     b.HasKey("RoomDetailId");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomRef");
 
                     b.ToTable("RoomDetail", "HotelManagementSystem");
                 });
@@ -227,9 +245,7 @@ namespace FirstProject.Migrations
                 {
                     b.HasOne("FirstProject.DAL.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("HotelID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HotelRef");
 
                     b.Navigation("Hotel");
                 });
@@ -238,15 +254,11 @@ namespace FirstProject.Migrations
                 {
                     b.HasOne("FirstProject.DAL.Guest", "Guest")
                         .WithMany()
-                        .HasForeignKey("GuestID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GuestRef");
 
                     b.HasOne("FirstProject.DAL.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomRef");
 
                     b.Navigation("Guest");
 
@@ -257,9 +269,7 @@ namespace FirstProject.Migrations
                 {
                     b.HasOne("FirstProject.DAL.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("HotelID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HotelRef");
 
                     b.Navigation("Hotel");
                 });
@@ -268,9 +278,7 @@ namespace FirstProject.Migrations
                 {
                     b.HasOne("FirstProject.DAL.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomRef");
 
                     b.Navigation("Room");
                 });

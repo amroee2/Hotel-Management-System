@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FirstProject.DAL;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
-namespace FirstProject.DAL
+namespace FirstProject.DsConn
 {
     public class FirstContext : DbContext
     {
@@ -21,7 +22,7 @@ namespace FirstProject.DAL
 
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
-        public DbSet <HotelDetail> HotelDetails { get; set; }
+        public DbSet<HotelDetail> HotelDetails { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomDetail> RoomDetails { get; set; }
