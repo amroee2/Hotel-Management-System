@@ -6,7 +6,6 @@ namespace FirstProject.DAL
     public class Guest
     {
         [Key]
-
         public int GuestId { get; set; }
         [Required]
         public string? GuestFirstName { get; set; }
@@ -20,10 +19,5 @@ namespace FirstProject.DAL
         public string? GuestAddess { get; set; }
         [Required]
         public string? GuestPassword { get; set; }
-
-        //Relationships
-
-        public DbSet<Reservation>? Reservations { get; set; }
-        public DbSet<Review>? Reviews { get; set; }
     }
 }

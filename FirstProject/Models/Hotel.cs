@@ -16,17 +16,6 @@ namespace FirstProject.DAL
         [Required, EmailAddress]
         public string ?HotelEmail { get; set; }
         [Required]
-        public int ?HotelRating { get; set; }
-
-        //Relationships
-        public IList<Room>? Rooms { get; set; }
-        public IList<HotelImages>? Images { get; set; }
-
-        public IList<Review> ?Reviews { get; set; }
-
-        public int LocationID { get; set; }
-
-        public Location? Location { get; set; }
-
+        public string? HotelImage { get; set; }
     }
 }
