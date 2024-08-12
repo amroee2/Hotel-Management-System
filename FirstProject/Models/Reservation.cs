@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FirstProject.DAL
 {
@@ -19,9 +20,12 @@ namespace FirstProject.DAL
         //Relationships
         public int GuestID { get; set; }
 
+        [ForeignKey("GuestRef")]
+
         public Guest? Guest { get; set; }
 
         public int RoomId {  get; set; }
+        [ForeignKey("RoomRef")]
 
         public Room? Room { get; set; }
 
