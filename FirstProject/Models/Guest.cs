@@ -12,20 +12,13 @@ namespace FirstProject.DAL
         [Required]
         [Column(TypeName = "nvarchar(max)")]
 
-        public string? GuestFirstName { get; set; }
-        [Required]
-        [Column(TypeName = "nvarchar(max)")]
-
-        public string? GuestLastName { get; set; }
-        [Required]
-        [Column(TypeName = "nvarchar(max)")]
-        public string? GuestPhone { get; set; }
+        public string? GuestUserName { get; set; }
+     
+        
         [Required, EmailAddress]
         [Column(TypeName = "nvarchar(max)")]
         public string? GuestEmail { get; set; }
-        [Required]
-        [Column(TypeName = "nvarchar(max)")]
-        public string? GuestAddess { get; set; }
+        
         [Required]
         [Column(TypeName = "nvarchar(max)")]
         public string? GuestPassword { get; set; }
