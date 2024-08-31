@@ -12,10 +12,8 @@ namespace FirstProject.Controllers
     public class GuestAPI : ControllerBase
     {
 
-        //DB context
         private readonly FirstContext _Conn;
         
-        //controller
         public GuestAPI(FirstContext conn)
         {
             _Conn = conn;
@@ -25,7 +23,6 @@ namespace FirstProject.Controllers
         [Route("login/{email}/{password}")]
         public IActionResult Login(string email, string password)
         {
-            //string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             var guest = _Conn.Guests.FirstOrDefault(g => g.GuestEmail == email);
 
             if (guest != null && BCrypt.Net.BCrypt.Verify(password, guest.GuestPassword))

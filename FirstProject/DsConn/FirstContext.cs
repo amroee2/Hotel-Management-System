@@ -1,4 +1,5 @@
-﻿using FirstProject.DAL;
+﻿using FirstProject.Controllers;
+using FirstProject.DAL;
 using FirstProject.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
