@@ -27,11 +27,11 @@ namespace FirstProject.DAL
 
         public int? Price { get; set; }
         [Required]
-        public Boolean? Status { get; set; }
+        public bool? Status { get; set; }
         [Required]
         [Column(TypeName = "nvarchar(max)")]
 
-        public string? RoomImage { get; set; }
+        public byte[]? RoomImage { get; set; }
         [Column(TypeName = "int")]
         public int HotelID { get; set; }
         [ForeignKey("HotelID")]
