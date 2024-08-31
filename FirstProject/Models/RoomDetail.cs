@@ -14,6 +14,8 @@ namespace FirstProject.DAL
         public string? RoomDetailName { get; set; }
         [Column(TypeName = "int")]
         public int RoomDetailCount { get; set; }
+        public int RoomCapacity { get; set; }
+
         //Relationships
         [Column(TypeName = "int")]
         public int RoomId { get; set; }
