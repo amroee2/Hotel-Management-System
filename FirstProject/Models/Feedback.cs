@@ -20,7 +20,7 @@ namespace FirstProject.Models
         //[Column(TypeName = "nvarchar")]
         //public string? GuestEmail { get; set; }
 
-        [Column(TypeName = "nvarchar")]
+        [Column(TypeName = "nvarchar(Max)")]
         [Required]
         public string? Comments { get; set; }
 
