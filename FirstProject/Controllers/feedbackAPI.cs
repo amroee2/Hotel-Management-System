@@ -49,7 +49,7 @@ namespace FirstProject.Controllers
 
         //Update
         [HttpGet]
-        [Route("Updatefeedback/{id}/{comments}")]
+        [Route("Updatefeedback/{id}/{comment}")]
         public string UpdateFeedback(int id, String comment)
         {
             // Find the existing hotel by ID
