@@ -2,15 +2,30 @@ using FirstProject.DsConn;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<FirstContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("SecondConn")));
-// Add services to the container.
 
+// Add services to the container.
+builder.Services.AddDbContext<FirstContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SecondConn")));
+
+// Add CORS policy to allow any origin
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+// Add controllers
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Use CORS middleware
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 

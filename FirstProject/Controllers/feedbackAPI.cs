@@ -32,7 +32,7 @@ namespace FirstProject.Controllers
                 return BadRequest("There is no such guest in the system");
             }
            
-                     else
+            else
             {
                 Feedback feedback = new Feedback();
                 feedback.GuestID = GuestID;
@@ -40,8 +40,6 @@ namespace FirstProject.Controllers
                 feedback.Comments = comment;
                 _Conn.Feedbacks.Add(feedback);
                _Conn.SaveChanges();
-
-
             }
 
             return Ok("feedback added successfuly");

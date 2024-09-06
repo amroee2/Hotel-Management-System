@@ -17,8 +17,19 @@ namespace FirstProject.Controllers
         }
 
         [HttpGet]
-        [Route("insertRoomDetails/{roomId}/{name}/{count}")]
+        [Route("getRoomDetails/{roomId}")]
+        public IActionResult getRoomDetails(int roomId)
+        {
+            var roomDetails = _Conn.RoomDetails.Where(r => r.RoomId == roomId).ToList();
+            if (roomDetails == null)
+            {
+                return BadRequest("There are currently no room details");
+            }
+            return Ok(roomDetails);
+        }
 
+        [HttpGet]
+        [Route("insertRoomDetails/{roomId}/{name}/{count}")]
         public IActionResult insertRoomDetails(int roomId, string name, int count)
         {
             var room = _Conn.Rooms.FirstOrDefault(g => g.RoomId == roomId);
@@ -27,45 +38,37 @@ namespace FirstProject.Controllers
             {
                 return BadRequest("no Room");
             }
-            else { 
-                RoomDetail roomDetail = new RoomDetail() ;
+            else
+            {
+                RoomDetail roomDetail = new RoomDetail();
                 roomDetail.RoomId = room.RoomId;
                 roomDetail.RoomDetailName = name;
                 roomDetail.RoomDetailCount = count;
 
                 _Conn.Add(roomDetail);
-                _Conn.SaveChanges();    
+                _Conn.SaveChanges();
 
-            return Ok("Room Details is added successfuly");
+                return Ok("Room Details is added successfully");
             }
         }
 
         [HttpGet]
         [Route("updateRoomDetails/{roomDetailsId}/{name}/{count}")]
-        public String updateRoomDetails (int roomDetailsId,String name,int count)
+        public String updateRoomDetails(int roomDetailsId, String name, int count)
         {
-            
-            var roomDetails=_Conn.RoomDetails.FirstOrDefault(h=>h.RoomDetailId == roomDetailsId);
+            var roomDetails = _Conn.RoomDetails.FirstOrDefault(h => h.RoomDetailId == roomDetailsId);
             if (roomDetails == null)
             {
                 return "no Room details to update";
             }
-            else {
-
+            else
+            {
                 roomDetails.RoomDetailName = name;
                 roomDetails.RoomDetailCount = count;
-               // roomDetails.RoomCapacity=capacity;
-               _Conn.SaveChanges ();
+                _Conn.SaveChanges();
 
                 return "Update is Done";
             }
-        
-        
-        
         }
-
-
-
-
     }
 }

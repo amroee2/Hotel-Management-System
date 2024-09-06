@@ -17,6 +17,12 @@ namespace FirstProject.Controllers
         }
 
         [HttpGet]
+        [Route("getHotelDetails")]
+        public IActionResult getHotelDetails()
+        {
+            return Ok(_Conn.HotelDetails.ToList());
+        }
+        [HttpGet]
         [Route("insertHotelDetails/{hotelId}/{name}/{image}")]
         public IActionResult createHotelDetails(int hotelId,String name,String image) {
 

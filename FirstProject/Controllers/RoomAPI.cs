@@ -33,27 +33,13 @@ namespace FirstProject.Controllers
             {
                 return NotFound("Hotel not found.");
             }
-
-            // Convert the Base64 encoded image string to a byte array
-            byte[] imageBytes;
-            try
-            {
-                imageBytes = Convert.FromBase64String(Image);
-            }
-            catch (FormatException)
-            {
-                return BadRequest("The provided image is not a valid Base64 string.");
-            }
-
-
-            // Create the room object
             Room ObjRoom = new Room();
             ObjRoom.RoomName = Name;
             ObjRoom.RoomNumber = RoomN;
             ObjRoom.Type = Type;
             ObjRoom.Price = int.Parse(Price);
             ObjRoom.Status = Status;
-            ObjRoom.RoomImage = imageBytes; 
+            ObjRoom.RoomImage = Image; 
             ObjRoom.HotelID = hotelId; 
 
             // Add the room to the database
@@ -65,7 +51,7 @@ namespace FirstProject.Controllers
             
         [HttpGet]
         [Route("UpdateRoom/{Name}/{RoomN}/{Type}/{Price}/{Status}/{Image}")]
-        public string UpdateRoom(string Name, string RoomN, string Type, string Price, bool Status, byte[] Image)
+        public string UpdateRoom(string Name, string RoomN, string Type, string Price, bool Status, string Image)
         {
 
             // Find the existing hotel by Room Number
@@ -137,14 +123,10 @@ namespace FirstProject.Controllers
         [HttpGet]
         [Route("GetRooms")]
 
-        public string GetRooms()
+        public IActionResult GetRooms()
         {
-            var RoomsData = _Conn.Rooms.ToList();
-            JavaScriptSerializer JsData = new JavaScriptSerializer();         
-            JsData.MaxJsonLength = int.MaxValue;
-            string Val = JsData.Serialize(RoomsData);
-
-            return Val;
+            var rooms = _Conn.Rooms.ToList();
+            return rooms.Any() ? Ok(rooms) : BadRequest("There are currently no rooms available");
         }
 
         // Retrieve all rooms where Status is true (reserved)

@@ -31,7 +31,7 @@ namespace FirstProject.DAL
         [Required]
         [Column(TypeName = "nvarchar(max)")]
 
-        public byte[]? RoomImage { get; set; }
+        public string? RoomImage { get; set; }
         [Column(TypeName = "int")]
         public int HotelID { get; set; }
         [ForeignKey("HotelID")]

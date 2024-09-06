@@ -18,7 +18,13 @@ namespace FirstProject.Controllers
         {
             _Conn = conn;
         }
-
+        [HttpGet]
+        [Route("getHotel")]
+        public IActionResult GetHotel()
+        {
+            var hotel = _Conn.Hotels;
+            return Ok(hotel);
+        }
         [HttpGet]
         [Route("insertHotel/{Name}/{Desc}/{PhoneN}/{Email}/{Image}")]
         public string AddHotel(string Name,string Desc,string PhoneN,string Email,string Image)
