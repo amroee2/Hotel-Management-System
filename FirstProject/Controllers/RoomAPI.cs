@@ -54,8 +54,7 @@ namespace FirstProject.Controllers
         public string UpdateRoom(string Name, string RoomN, string Type, string Price, bool Status, string Image)
         {
 
-            // Find the existing hotel by Room Number
-            var ObjRoom = _Conn.Rooms.FirstOrDefault(r => r.RoomName == RoomN);
+            var ObjRoom = _Conn.Rooms.FirstOrDefault(r => r.RoomNumber == RoomN);
 
             if (ObjRoom == null)
             {
